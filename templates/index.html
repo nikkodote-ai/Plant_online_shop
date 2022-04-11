@@ -1,0 +1,60 @@
+{%extends 'bootstrap/base.html'%}
+{%block content%}
+{%include 'header.html'%}
+
+        <header class="bg-dark py-5 banner">
+            <div class="container px-4 px-lg-5 my-5">
+
+                <div class="text-center text-white">
+                    <h1 class="main-banner display-4 fw-bolder">Because</h1>
+                    <p class="tag-banner lead fw-normal  mb-0">you can never have too many plants</p>
+                </div>
+            </div>
+        </header>
+<!-- Section-->
+
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                {%if current_user.is_authenticated%}
+                <h1 class="tag-banner cafe-color-americano">Find the secret of life here, {{current_user.name.title()}}</h1><br>
+                    {%endif%}
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    {%for plant in all_plants%}
+                    <div class="col mb-5">
+
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <a class="btn btn-outline-dark mt-auto" href={{url_for('open_plant_page', plant_id = plant.id)}}>
+                            <img class="card-img-top index" src={{plant.img_url}} alt={{plant.plant_name}} />
+                            <!-- Product details--></a>
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <a class="btn mt-auto" href={{url_for('open_plant_page', plant_id = plant.id)}}>
+                                    <h5 class="fw-bolder">{{plant.plant_name}}</h5>
+                                    </a>
+                                    <!-- Product price-->
+                                    <h5 class="fw-bolder">${{plant.price}}</h5>
+
+                                </div>
+                            </div>
+                        </a>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href={{url_for('open_plant_page', plant_id = plant.id)}}>Check Product</a></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {%endfor%}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{%include 'footer.html'%}
+{%endblock%}

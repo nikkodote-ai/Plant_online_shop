@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+<!--        <title>Shop Homepage - Start Bootstrap Template</title>-->
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href={{url_for('static', filename = "images/favicon.ico")}} />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href= {{url_for('static', filename = "css/styles.css")}} rel="stylesheet" />
+
+<!--        FONTS-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Serif+Display&family=Dela+Gothic+One&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+
+
+
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href={{url_for('home')}}>The Mulch</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href={{url_for('home')}}>Plants</a></li>
+                        <li class="nav-item"><a class="nav-link" href={{url_for('about')}}>Plant Care</a></li>
+                        <li class="nav-item"><a class="nav-link" href={{url_for('about')}}>Home Decor</a></li>
+                        <li class="nav-item">
+<!--                            TODO if admin, permit add cafe-->
+                            {%if current_user.is_authenticated%}
+
+                                 <div class="text-center"><a class="btn-dark btn" href={{url_for('create_new_plant')}}>Add New Plant</a></div>
+                            </li>
+
+                         <li class="nav-item">
+<!--                            TODO if admin, permit add cafe-->
+                    <div class="text-center"><a class="btn-dark btn" href={{url_for('logout')}}>Logout</a></div>
+               </li>
+
+                        <li class="nav-item">
+<!--                            TODO if admin, permit add cafe-->
+                    <div class="text-center"><a class="btn-dark btn" href={{url_for('create_new_care_guide')}}>Add Care Guide</a></div>
+               </li>
+
+                         <li class="nav-item">
+<!--                            TODO if admin, permit add cafe-->
+                    <div class="text-center"><a class="btn-dark btn" href={{url_for('create_checkout_session')}}>Checkout</a></div>
+               </li>
+
+                        {%else%}
+
+
+                                 <li class="nav-item">
+<!--                            TODO if admin, permit add cafe-->
+                    <div class="text-center"><a class="btn-dark btn" href={{url_for('register')}}>Register</a></div>
+                </li>
+
+                          <li class="nav-item">
+<!--                            TODO if admin, permit add cafe-->
+                    <div class="text-center"><a class="btn-dark btn" href={{url_for('login')}}>Login</a></div>
+                </li>
+
+
+ {%endif%}
+
+                            </ul>
+                        </li>
+                    </ul>
+                   <div class="form-outline">
+  <input type="search" id="form1" class="form-control" placeholder="Search" aria-label="Search" />
+</div>
+                    <form class="d-flex">
+
+                        <button class="btn btn-outline-dark " type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            <a href ={{url_for('my_cart')}}>
+                            Cart ({{ session['ShoppingCart']|length if session['ShoppingCart'] is not none }})
+                                </a>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->

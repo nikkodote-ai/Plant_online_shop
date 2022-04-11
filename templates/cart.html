@@ -1,0 +1,55 @@
+{%extends 'Bootstrap/base.html'%}
+{%import 'bootstrap/wtf.html' as wtf%}
+
+{%block content%}
+{%include 'header.html'%}
+
+<div class = 'container'>
+    <div class = 'row'>
+        <div class = 'col-lg-4 col-md-6 col-sm'>
+ <table class = "table table-lg">
+     <thead>
+     <th>Item No.</th>
+     <th>Name</th>
+     <th>Price</th>
+     <th>Quantity</th>
+     <th>Update</th>
+     <th>Remove</th>
+     </thead>
+
+     {%for key, product in session['ShoppingCart'].items()%}
+     <tr>
+         <td>{{loop.index}}</td>
+         <td>{{product.name}}</td>
+         <td>${{product.price}}</td>
+         <td>{{product.quantity}}</td>
+         <td><a href = ''>Update</a></td>
+         <td><a href = "{{url_for('delete_item', id = key)}}" class = 'btn btn-danger btn sm'>Remove</a></td>
+     </tr>
+     {%endfor%}
+     <tr>
+     <td><a href = ''></a>
+     </td>
+     <td colspan = 3>
+        {%set amount = grand_total*100%}
+         <form action="/pay" method="POST">
+             <input type="hidden" name="amount" value = "{{amount}}">
+  <script
+    src="https://checkout.stripe.com/checkout.js"
+    class="stripe-button"
+    data-key="pk_test_51Kk2D4EnlwvGwDmRTUxhxIc6rhyo7egz0VXnnlQCUOdQnujgfDandBCJYgOzBBrfgXt67TqsaLb5vtdiaQls6OY900uxz7VXfh"
+    data-name="My Cart"
+    data-description="Cheers to a good life"
+    data-amount="{{amount}}"
+    data-currency="aud">
+  </script>
+</form>
+     </td>
+     <td colspan =4><a href = ''><h2>Total: ${{grand_total}}</h2></a></td>
+     </tr>
+ </table>
+        </div>
+    </div>
+</div>
+{%include 'footer.html'%}
+{%endblock%}

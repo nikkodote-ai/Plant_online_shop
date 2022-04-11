@@ -1,0 +1,32 @@
+{%extends 'Bootstrap/base.html'%}
+{%import 'bootstrap/wtf.html' as wtf%}
+
+{%block content%}
+{%include 'header.html'%}
+<div class="container cafe-container">
+    <div class="row">
+      <div class="col-lg-6 col-md-10 mx-auto form-text">
+
+<!--          add flash messages-->
+     {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li style = 'color:#FF0000; font-weight: 700' >{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+          {% endwith %}
+
+          <!-- This is where the form will go -->
+          <p><h3 class="cafe-name cafe-color-espresso" style = "font-size:5rem">Welcome to the club</h3></p>
+          <p><h4 class="cafe-detail cafe-color-citrus">for the love of coffee ☕</h4></p>
+        {{wtf.quick_form(form)}}
+
+
+      </div>
+    </div>
+  </div>
+
+{%include 'footer.html'%}
+{%endblock%}

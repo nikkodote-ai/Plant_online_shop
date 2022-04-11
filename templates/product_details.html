@@ -1,0 +1,77 @@
+{%extends 'bootstrap/base.html'%}
+
+{%block content%}
+{%include 'header.html'%}
+
+<!--custom header-->
+
+<!--        <header class="bg-dark py-5" style = 'background-image: linear-gradient(rgba(0, 0, 0, 0.8),-->
+<!--      rgba(0, 0, 0, 0.8)),url({{plant.img_url}})'>-->
+
+
+<!--            <div class="container px-4 px-lg-5 my-5">-->
+
+<!--                <div class="text-center text-white">-->
+<!--                    <h1 class=" plant-name">{{plant.name}}</h1>-->
+<!--&lt;!&ndash;                    <p class="lead fw-normal text-white-50 mb-0">Kickstart your day with a fresh taste of coffee</p>&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </header>-->
+
+<div class="container plant-container">
+  <div class="row plant-row">
+
+      <div class="col-lg-6 col-md-12 col-sm-12 plant-col">
+        <img src={{plant.img_url}} class = ''>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 plant-col-2">
+        <p></p>
+        <div class="title-size">
+        <h1 class="title-size plant-details ">{{plant.plant_name}}</h1></div>
+        <hr>
+        <h2 class="plant-color-americano product-details">Price: ${{plant.price}}</h2>
+        <form method="POST", action = {{url_for('add_to_cart')}}>
+            <input type="hidden" name = 'product_id' value = {{plant.id}}>
+            <button type = 'submit' class = 'btn btn-sm btn-outline-dark'>Add to Cart</button>
+            <label for = "", class = 'btn'>Quantity:</label>
+            <input type ="number" class = '' name ='quantity' id="" value = '1', min ='1', max = "{{plant.quantity}}">
+        </form>
+<!--        <h2 class="plant-color-americano product-details">Quantity: [   ]</h2>-->
+        <br>
+        <hr>
+        <h2 class="plant-color-americano product-details">{{plant.title}}</h2>
+
+
+        <h3 class="plant-color-citrus  plant-description">{{plant.details}}</h3>
+        </p>
+        <br>
+        <p><h2 class="plant-details plant-color-espresso">Care Guide</h2>
+        <h3 class = "plant-color-citrus plant-description">{{care_guide.guide_detail}}</h3>
+        </p>
+<!--        careguide here-->
+
+    </div>
+
+
+
+
+
+
+  </div>
+    <div class = 'container'>
+    <div class="row">
+        <div class = 'col-lg'>
+
+            <form method = 'POST' action = {{url_for('edit_rating', plant_id = plant.id)}}>
+<button class="btn btn-dark btn-outline-dark nav-link vertical-center", type="submit" }}>
+                            Update Product Details
+                        </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+{%include 'footer.html'%}
+{%endblock%}
